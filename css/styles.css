@@ -314,6 +314,34 @@ img { max-width: none }
 .job .tags { margin-top: 6px }
 .job p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted-2); max-width: 52ch }
 
+#projects { padding-top: 0 }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 20px }
+.project {
+  padding: 32px; border-radius: 24px;
+  background: var(--surface); border: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.rv .project[data-reveal] { transition: opacity .9s var(--ease), transform .9s var(--ease), border-color .3s, background .3s }
+.rv .project.delay-1[data-reveal] { transition-delay: .12s }
+.project:hover { border-color: oklch(0.8 0.14 70 / .6); background: var(--surface-hover) }
+.project-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap }
+.project-org { font-family: var(--font-mono); font-size: 12px; color: oklch(0.72 0.01 70) }
+.project-badge {
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  padding: 5px 12px; border-radius: 999px; font-size: 12px;
+  color: var(--amber); border: 1px solid oklch(0.8 0.14 70 / .45); background: oklch(0.8 0.14 70 / .08);
+}
+.project-badge.live { color: var(--green); border-color: oklch(0.8 0.14 150 / .45); background: oklch(0.8 0.14 150 / .08) }
+.project h3 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 34px; letter-spacing: -0.03em; line-height: 1.05 }
+.project p { margin: 0; font-size: 16px; line-height: 1.6; color: oklch(0.76 0.01 70); text-wrap: pretty }
+.project-link {
+  margin-top: auto; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 13px; text-decoration: none;
+}
+.project-link svg { transition: transform .25s var(--ease) }
+.project-link:hover svg { transform: translate(2px, -2px) }
+
 #education { padding-bottom: 0 }
 #education .split { align-items: center }
 .edu-card {
@@ -393,6 +421,11 @@ img { max-width: none }
 }
 .site-footer a { color: var(--muted-3); text-decoration: none }
 .site-footer a:hover { color: var(--text) }
+
+/* Small screens: keep the header to one line (logo + Hire me) */
+@media (max-width: 720px) {
+  .site-nav a:not(.nav-cta) { display: none }
+}
 
 /* Keep the floating cards inside the viewport on narrow screens */
 @media (max-width: 560px) {
