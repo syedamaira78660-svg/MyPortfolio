@@ -324,6 +324,7 @@ img { max-width: none }
 .rv .project[data-reveal] { transition: opacity .9s var(--ease), transform .9s var(--ease), border-color .3s, background .3s }
 .rv .project.delay-1[data-reveal] { transition-delay: .12s }
 .project:hover { border-color: oklch(0.8 0.14 70 / .6); background: var(--surface-hover) }
+.project-wide { grid-column: 1 / -1 }
 .project-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap }
 .project-org { font-family: var(--font-mono); font-size: 12px; color: oklch(0.72 0.01 70) }
 .project-badge {
