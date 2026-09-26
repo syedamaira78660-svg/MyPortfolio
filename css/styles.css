@@ -350,6 +350,7 @@ img { max-width: none }
 }
 .edu-list { display: flex; flex-direction: column; gap: 20px }
 .edu-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap }
+.edu-major { font-size: 16px; color: var(--text-soft) }
 .edu-school { font-size: 16px; color: oklch(0.76 0.01 70) }
 
 .quotes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 20px }
