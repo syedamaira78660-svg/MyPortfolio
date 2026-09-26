@@ -11,6 +11,6 @@ Open `index.html` in a browser, or serve the folder with any static host (e.g. G
 
 ## Still to do
 
-- Replace the bracketed placeholders (dates, earlier roles, education, testimonials).
+- Replace the bracketed placeholders (education, testimonials).
 - Add the resume PDF and point the two resume buttons at it.
 - Set `data-endpoint` on the contact form to a form service URL so messages are delivered.

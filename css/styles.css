@@ -271,7 +271,7 @@ img { max-width: none }
 .about-body em { font-style: normal; color: var(--text) }
 
 #skills { padding-top: 0 }
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 20px }
 .skill-card {
   position: relative; padding: 32px; border-radius: 24px;
   background: var(--surface); border: 1px solid var(--line);
@@ -284,7 +284,7 @@ img { max-width: none }
 .skill-num { font-family: var(--font-mono); font-size: 12px; color: oklch(0.72 0.01 70) }
 .skill-card h3 {
   margin: auto 0 0; font-family: var(--font-display); font-weight: 600;
-  font-size: 34px; letter-spacing: -0.03em; line-height: 1.05;
+  font-size: 30px; letter-spacing: -0.03em; line-height: 1.05;
 }
 .skill-card p { margin: 0; font-size: 16px; line-height: 1.6; color: oklch(0.76 0.01 70) }
 .tags { display: flex; flex-wrap: wrap; gap: 8px }
@@ -311,6 +311,7 @@ img { max-width: none }
   margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 28px; letter-spacing: -0.025em;
 }
 .job-company { font-size: 16px; color: oklch(0.9 0.01 70) }
+.job .tags { margin-top: 6px }
 .job p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted-2); max-width: 52ch }
 
 #education { padding-bottom: 0 }

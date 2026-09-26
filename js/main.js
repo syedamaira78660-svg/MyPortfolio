@@ -31,7 +31,7 @@
   });
 
   // Rotating role word
-  const words = ['full stack developer.', 'Node.js engineer.', 'Java developer.', 'AI-assisted builder.'];
+  const words = ['senior full-stack engineer.', 'Java & Spring engineer.', 'React developer.', 'Azure & microservices engineer.', 'AI-assisted developer.'];
   let roleWord = document.getElementById('role-word');
   let idx = 0;
   if (!reduceMotion) {
