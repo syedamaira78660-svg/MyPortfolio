@@ -50,6 +50,10 @@
   const items = track.innerHTML;
   track.innerHTML = items.repeat(4);
 
+  // Tools strip in the "Uses" card: same seamless-loop trick
+  const usesTrack = document.getElementById('uses-track');
+  if (usesTrack) usesTrack.innerHTML = usesTrack.innerHTML.repeat(2);
+
   // Contact form
   const form = document.getElementById('contact-form');
   const sent = document.getElementById('sent');
@@ -81,6 +85,73 @@
     sent.hidden = true;
     form.hidden = false;
   });
+
+  // Testimonials carousel: centered cards, dots, autoplay with pause
+  const ttrack = document.getElementById('ttrack');
+  if (ttrack) {
+    const cards = [...ttrack.children];
+    const dotsBox = document.getElementById('tdots');
+    const pauseBtn = document.getElementById('tpause');
+    let current = 0, timer = null, paused = reduceMotion;
+
+    const dots = cards.map((_, i) => {
+      const d = document.createElement('button');
+      d.type = 'button'; d.className = 'tdot'; d.setAttribute('role', 'tab');
+      d.setAttribute('aria-label', `Testimonial ${i + 1}`);
+      d.addEventListener('click', () => { go(i); restart(); });
+      dotsBox.appendChild(d);
+      return d;
+    });
+
+    const mark = i => {
+      current = i;
+      cards.forEach((c, j) => c.classList.toggle('active', j === i));
+      dots.forEach((d, j) => d.setAttribute('aria-selected', j === i ? 'true' : 'false'));
+    };
+    const go = i => {
+      const c = cards[i];
+      ttrack.scrollTo({ left: c.offsetLeft - (ttrack.clientWidth - c.offsetWidth) / 2 });
+      mark(i);
+    };
+
+    // Keep the active card in sync when the visitor swipes or scrolls
+    let raf = 0;
+    ttrack.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const mid = ttrack.scrollLeft + ttrack.clientWidth / 2;
+        let best = 0, bestD = Infinity;
+        cards.forEach((c, j) => {
+          const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+          if (d < bestD) { bestD = d; best = j; }
+        });
+        if (best !== current) mark(best);
+      });
+    }, { passive: true });
+
+    const restart = () => {
+      clearInterval(timer);
+      if (!paused) timer = setInterval(() => go((current + 1) % cards.length), 5000);
+    };
+    const setPaused = p => {
+      paused = p;
+      pauseBtn.classList.toggle('paused', p);
+      pauseBtn.setAttribute('aria-label', p ? 'Play testimonials' : 'Pause testimonials');
+      restart();
+    };
+    pauseBtn.addEventListener('click', () => setPaused(!paused));
+    ttrack.addEventListener('pointerdown', () => setPaused(true));
+    ttrack.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { go(Math.min(cards.length - 1, current + 1)); setPaused(true); }
+      if (e.key === 'ArrowLeft') { go(Math.max(0, current - 1)); setPaused(true); }
+    });
+
+    // Start on the first card without the smooth-scroll animation
+    ttrack.style.scrollBehavior = 'auto';
+    go(0);
+    ttrack.style.scrollBehavior = '';
+    setPaused(paused);
+  }
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
