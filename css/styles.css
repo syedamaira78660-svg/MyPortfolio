@@ -270,6 +270,105 @@ img { max-width: none }
 .about-body p { margin: 0; text-wrap: pretty }
 .about-body em { font-style: normal; color: var(--text) }
 
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Bento (what you get / timezones / uses) ---------- */
+.bento {
+  margin-top: clamp(56px, 7vw, 88px);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px;
+}
+.bento-card {
+  position: relative; overflow: hidden; isolation: isolate;
+  min-height: 440px; padding: 32px; border-radius: 24px;
+  background: var(--surface); border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+}
+.rv .bento-card[data-reveal] { transition: opacity .9s var(--ease), transform .9s var(--ease), border-color .3s }
+.rv .bento-card.delay-1[data-reveal] { transition-delay: .12s }
+.bento-card:hover { border-color: oklch(0.8 0.14 70 / .45) }
+.bento-copy { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 12px }
+.bento-copy .eyebrow { text-transform: uppercase; letter-spacing: .06em }
+.bento-copy h3 {
+  margin: 0; font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(24px, 2.2vw, 28px); line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance;
+}
+.bento-copy.centered { margin-top: auto; align-items: center; text-align: center }
+.bento-copy.centered .eyebrow { color: var(--muted-3) }
+
+/* What you get: open box with a floating pill */
+.get-art { position: absolute; left: 0; right: 0; bottom: -28px; height: 280px; pointer-events: none }
+.get-box { position: absolute; left: 50%; bottom: 0; width: min(92%, 380px); transform: translateX(-50%) }
+.box-flap { fill: oklch(0.3 0.01 60); stroke: oklch(0.4 0.01 60); stroke-width: 1 }
+.box-back { fill: oklch(0.22 0.01 60); stroke: oklch(0.36 0.01 60) }
+.box-side { fill: oklch(0.26 0.01 60); stroke: oklch(0.38 0.01 60) }
+.box-front { fill: oklch(0.29 0.01 60); stroke: oklch(0.4 0.01 60) }
+.get-pill {
+  position: absolute; left: 50%; top: 12px; z-index: 1;
+  display: flex; align-items: center; gap: 12px; white-space: nowrap;
+  padding: 10px 20px 10px 10px; border-radius: 999px;
+  background: oklch(0.19 0.01 60 / .9); border: 1px solid oklch(0.8 0.14 70 / .35);
+  box-shadow: 0 16px 40px oklch(0 0 0 / .4), 0 0 0 6px oklch(0.8 0.14 70 / .05);
+  animation: pillFloat 5s ease-in-out infinite;
+}
+@keyframes pillFloat {
+  0%, 100% { transform: translate(-50%, 0) }
+  50% { transform: translate(-50%, -10px) }
+}
+.get-pill-icon {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: grid; place-items: center; color: var(--amber);
+  background: oklch(0.8 0.14 70 / .12);
+}
+.get-pill-text { display: flex; flex-direction: column; gap: 2px }
+.get-pill-text strong { font-size: 15px; font-weight: 600 }
+.get-pill-text small { font-size: 13px; color: var(--muted-2) }
+.bento-arrow {
+  position: absolute; right: 24px; bottom: 24px; z-index: 3;
+  width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--text); background: oklch(0.26 0.01 60 / .9); border: 1px solid var(--line-2);
+  transition: background .25s, color .25s, transform .25s var(--ease);
+}
+.bento-arrow:hover { background: var(--amber); color: var(--bg); transform: translateX(3px) }
+
+/* Timezones: dotted globe drawn by main.js */
+.bento-globe .globe {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+  width: 100%; height: 340px; display: block; cursor: grab; touch-action: pan-y;
+}
+.bento-globe .globe:active { cursor: grabbing }
+
+/* Uses: sliding tool tiles */
+.uses-strip {
+  position: absolute; left: 0; right: 0; top: 60px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+}
+.uses-track { display: flex; width: max-content; padding: 10px 0; animation: marquee 30s linear infinite }
+.bento-uses:hover .uses-track { animation-play-state: paused }
+.tool {
+  position: relative; flex-shrink: 0; margin-right: 16px;
+  width: 116px; height: 116px; border-radius: 28px;
+  border: 1px solid var(--line-2); background: oklch(0.18 0.008 60);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+}
+.tool::before {
+  content: ""; position: absolute; inset: 8px; border-radius: 20px;
+  border: 1px solid var(--line); background: var(--surface);
+}
+.tool-mark {
+  position: relative; width: 44px; height: 44px; border-radius: 12px;
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -0.02em;
+  color: var(--bg); background: linear-gradient(135deg, var(--amber), var(--pink));
+}
+.tool:nth-child(3n+2) .tool-mark { background: linear-gradient(135deg, var(--pink), oklch(0.72 0.14 300)) }
+.tool:nth-child(3n) .tool-mark { background: linear-gradient(135deg, var(--green), oklch(0.78 0.12 200)) }
+.tool small { position: relative; font-family: var(--font-mono); font-size: 11px; color: var(--muted-2) }
+
 #skills { padding-top: 0 }
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 20px }
 .skill-card {
@@ -354,18 +453,88 @@ img { max-width: none }
 .edu-major { font-size: 16px; color: var(--text-soft) }
 .edu-school { font-size: 16px; color: oklch(0.76 0.01 70) }
 
-.quotes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 20px }
-.quote {
-  margin: 0; padding: 36px; border-radius: 24px;
-  background: var(--surface); border: 1px solid var(--line);
-  display: flex; flex-direction: column; gap: 28px;
+/* ---------- Testimonials carousel ---------- */
+.section-head.centered { align-items: center; text-align: center }
+.accent {
+  font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+  letter-spacing: -0.01em; padding-right: .06em;
+  background: linear-gradient(95deg, var(--amber), var(--pink));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.quote-mark { font-family: var(--font-display); font-size: 64px; line-height: 0.5; color: var(--pink) }
-.quote blockquote {
-  margin: 0; font-family: var(--font-display); font-size: 26px; line-height: 1.3;
-  letter-spacing: -0.015em; text-wrap: pretty;
+.section h2 .accent { font-size: 1.12em; line-height: .9 }
+
+#testimonials { padding-left: 0; padding-right: 0; overflow: hidden }
+#testimonials .container { padding: 0 var(--gutter) }
+.tcarousel { margin-top: 56px; display: flex; flex-direction: column; align-items: center; gap: 36px }
+.ttrack {
+  position: relative; width: 100%; display: flex; gap: 20px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  padding: 8px calc(50% - min(200px, 43vw)); scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  outline: none;
 }
-.quote figcaption { font-size: 15px; color: var(--muted-2) }
+.ttrack::-webkit-scrollbar { display: none }
+.tcard {
+  --tint: var(--amber);
+  flex: 0 0 min(400px, 86vw); scroll-snap-align: center;
+  margin: 0; min-height: 380px; padding: 32px; border-radius: 24px;
+  display: flex; flex-direction: column; gap: 18px;
+  border: 1px solid color-mix(in oklch, var(--tint) 28%, var(--line));
+  background:
+    radial-gradient(120% 80% at 50% 45%, color-mix(in oklch, var(--tint) 26%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in oklch, var(--tint) 14%, var(--surface)), var(--bg));
+  opacity: .45; transform: scale(.96);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.tcard.active { opacity: 1; transform: none }
+.tint-amber { --tint: var(--amber) }
+.tint-pink { --tint: var(--pink) }
+.tint-green { --tint: var(--green) }
+.tint-violet { --tint: oklch(0.7 0.16 295) }
+.tint-teal { --tint: oklch(0.75 0.12 195) }
+.tcard h3 {
+  margin: 0; font-family: var(--font-display); font-weight: 600;
+  font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; text-wrap: balance;
+}
+.tcard blockquote { margin: 0; font-size: 16px; line-height: 1.65; color: var(--text-soft); text-wrap: pretty }
+.tcard figcaption { margin-top: auto; display: flex; align-items: center; gap: 14px }
+.tcard-avatar {
+  width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; color: var(--bg);
+  background: linear-gradient(135deg, var(--tint), color-mix(in oklch, var(--tint) 50%, var(--pink)));
+  border: 2px solid oklch(0.96 0.008 80 / .15);
+}
+.tcard-avatar img { width: 100%; height: 100%; object-fit: cover }
+.tcard-who { display: flex; flex-direction: column; gap: 2px }
+.tcard-who strong { font-size: 16px; font-weight: 600 }
+.tcard-who small { font-size: 14px; color: var(--muted-2) }
+
+.tcontrols { display: flex; align-items: center; gap: 12px }
+.tdots {
+  display: flex; align-items: center; gap: 4px; padding: 0 16px; height: 50px;
+  border-radius: 999px; background: var(--surface); border: 1px solid var(--line);
+}
+.tdot {
+  width: 20px; height: 20px; padding: 0; border: 0; background: none; cursor: pointer;
+  display: grid; place-items: center;
+}
+.tdot::before {
+  content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--muted-3);
+  transition: width .35s var(--ease), background .35s;
+}
+.tdot[aria-selected="true"] { width: 44px }
+.tdot[aria-selected="true"]::before { width: 36px; background: var(--text) }
+.tpause {
+  width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  color: var(--text); background: var(--surface); border: 1px solid var(--line);
+  transition: background .25s, border-color .25s;
+}
+.tpause:hover { background: var(--surface-hover); border-color: var(--line-2) }
+.tpause .i-play, .tpause.paused .i-pause { display: none }
+.tpause.paused .i-play { display: block }
 
 /* ---------- Contact ---------- */
 #contact { padding-top: 0; padding-bottom: 40px }
@@ -384,6 +553,7 @@ img { max-width: none }
 }
 .contact-copy { display: flex; flex-direction: column; gap: 20px }
 .contact-copy h2 { font-size: clamp(44px, 6vw, 80px); line-height: 0.95; letter-spacing: -0.04em }
+.contact-copy h2 .accent { font-size: 1.08em; line-height: 1 }
 .contact-copy p { margin: 0; font-size: 18px; line-height: 1.6; color: var(--muted); max-width: 38ch }
 .contact-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px }
 
