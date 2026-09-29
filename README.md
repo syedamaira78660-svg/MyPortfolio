@@ -11,6 +11,6 @@ Open `index.html` in a browser, or serve the folder with any static host (e.g. G
 
 ## Still to do
 
-- Replace the bracketed placeholders (testimonials).
+- Replace the bracketed placeholders in the five testimonial cards (headline, quote, name, title). Put an `<img>` inside `.tcard-avatar` for a photo.
 - Add the resume PDF and point the two resume buttons at it.
 - Set `data-endpoint` on the contact form to a form service URL so messages are delivered.
