@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --bg: oklch(0.17 0.008 60);
   --bg-alt: oklch(0.195 0.01 60);
   --surface: oklch(0.2 0.01 60);
