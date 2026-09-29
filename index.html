@@ -17,6 +17,7 @@
 <script>document.documentElement.classList.add('rv')</script>
 <script src="js/main.js" defer></script>
 <script src="js/globe.js" defer></script>
+<script src="js/waves.js" defer></script>
 </head>
 <body>
 
@@ -34,15 +35,17 @@
   </nav>
 </header>
 
+<a class="side-rail" href="https://www.linkedin.com/in/syeda-maira-saad-168720a9/" target="_blank" rel="noopener">linkedin.com/in/syeda-maira-saad</a>
+
 <main id="top">
 <section class="hero" id="hero" aria-label="Introduction">
   <div class="hero-glow" id="hero-glow" aria-hidden="true"></div>
-  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <canvas class="hero-waves" id="hero-waves" aria-hidden="true"></canvas>
 
   <div class="hero-inner">
     <div class="hero-copy">
       <div class="badge"><span class="badge-dot"></span>Available for full-time &amp; freelance</div>
-      <h1 class="rise">Syeda Maira<br><span class="gradient-text">Saad</span></h1>
+      <h1 class="rise">Syeda Maira<br><span class="name-swap" id="name-swap"><span class="name-fill">Saad</span><span class="name-line" aria-hidden="true">Saad</span></span><span class="caret" aria-hidden="true"></span></h1>
       <div class="role-line rise">
         <span class="lead">I'm a</span><span class="role-word" id="role-word" aria-live="polite">senior full-stack engineer.</span>
       </div>
